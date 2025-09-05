@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Indian Railways AI Traffic Control System Design System */
+
+@layer base {
+  :root {
+    /* Indian Railways Brand Colors */
+    --ir-blue: 210 100% 15%;           /* Indian Railways Blue #003366 */
+    --ir-blue-light: 210 100% 25%;     /* Lighter blue variant */
+    --ir-saffron: 24 100% 60%;         /* Indian Saffron #FF9933 */
+    --ir-saffron-light: 24 100% 70%;   /* Lighter saffron */
+    
+    /* Core System Colors */
+    --background: 210 20% 8%;          /* Dark control room background */
+    --foreground: 210 40% 98%;         /* High contrast text */
+    --background-secondary: 210 25% 12%; /* Secondary background */
+    
+    /* Card and Surface Colors */
+    --card: 210 20% 10%;
+    --card-foreground: 210 40% 95%;
+    --card-header: 210 25% 15%;
+    
+    /* Interactive Elements */
+    --primary: 210 100% 15%;           /* IR Blue */
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 210 100% 20%;
+    
+    --secondary: 210 25% 15%;
+    --secondary-foreground: 210 40% 90%;
+    --secondary-hover: 210 25% 20%;
+    
+    --accent: 24 100% 60%;             /* IR Saffron */
+    --accent-foreground: 210 20% 10%;
+    --accent-hover: 24 100% 65%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;            /* Green #28A745 */
+    --success-foreground: 210 40% 98%;
+    --warning: 45 100% 51%;            /* Amber #FFC107 */
+    --warning-foreground: 210 20% 10%;
+    --destructive: 0 84% 60%;          /* Red #DC3545 */
+    --destructive-foreground: 210 40% 98%;
+    
+    /* Data Visualization */
+    --chart-1: 210 100% 50%;           /* Blue */
+    --chart-2: 24 100% 60%;            /* Orange */
+    --chart-3: 142 76% 36%;            /* Green */
+    --chart-4: 271 81% 56%;            /* Purple */
+    --chart-5: 0 84% 60%;              /* Red */
+    
+    /* Control Panel Elements */
+    --muted: 210 25% 15%;
+    --muted-foreground: 210 20% 65%;
+    --border: 210 25% 20%;
+    --input: 210 25% 15%;
+    --ring: 210 100% 50%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--ir-blue)), hsl(var(--ir-blue-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--ir-saffron)), hsl(var(--ir-saffron-light)));
+    --gradient-control: linear-gradient(180deg, hsl(var(--card)), hsl(var(--background-secondary)));
+    --gradient-status: linear-gradient(90deg, hsl(var(--success) / 0.1), hsl(var(--success) / 0.05));
+    
+    /* Shadows and Effects */
+    --shadow-control: 0 4px 20px hsl(var(--ir-blue) / 0.15);
+    --shadow-card: 0 2px 10px hsl(210 25% 5% / 0.5);
+    --shadow-interactive: 0 0 20px hsl(var(--accent) / 0.3);
+    
+    /* Animation Timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --radius: 0.5rem;
+  }
+
+  .light {
+    --background: 10 10% 100%;
+    --foreground: 210 20% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 8%;
+    --card-header: 210 25% 95%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 8%;
+
+    --primary: 210 100% 15%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 95%;
+    --secondary-foreground: 210 20% 8%;
+
+    --muted: 210 25% 95%;
+    --muted-foreground: 210 20% 25%;
+
+    --accent: 24 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 25% 90%;
+    --input: 210 25% 95%;
+    --ring: 210 100% 50%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 210 20% 8%;
+    --sidebar-primary: 210 100% 15%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 25% 95%;
+    --sidebar-accent-foreground: 210 20% 8%;
+    --sidebar-border: 210 25% 90%;
+    --sidebar-ring: 210 100% 50%;
+  }
+
+  .dark {
+    --background: 210 20% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 210 20% 10%;
+    --card-foreground: 210 40% 95%;
+    --card-header: 210 25% 15%;
+
+    --popover: 210 20% 10%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 210 100% 15%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 25% 15%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 210 25% 15%;
+    --muted-foreground: 210 20% 65%;
+
+    --accent: 24 100% 60%;
+    --accent-foreground: 210 20% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 25% 20%;
+    --input: 210 25% 15%;
+    --ring: 210 100% 50%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Control Panel Components */
+  .control-card {
+    @apply bg-card border border-border rounded-lg shadow-sm;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .control-header {
+    @apply bg-card-header border-b border-border px-6 py-4 rounded-t-lg;
+    background: var(--gradient-control);
+  }
+  
+  .metric-card {
+    @apply control-card p-6 hover:shadow-lg transition-all duration-300;
+  }
+  
+  .metric-card:hover {
+    box-shadow: var(--shadow-control);
+  }
+  
+  .status-indicator {
+    @apply inline-flex items-center justify-center w-3 h-3 rounded-full;
+  }
+  
+  .status-success {
+    @apply bg-success animate-pulse;
+  }
+  
+  .status-warning {
+    @apply bg-warning;
+  }
+  
+  .status-error {
+    @apply bg-destructive animate-pulse;
+  }
+  
+  /* Train and Railway Components */
+  .train-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded transition-all duration-200;
+  }
+  
+  .train-express {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .train-local {
+    @apply bg-secondary text-secondary-foreground;
+  }
+  
+  .train-freight {
+    @apply bg-accent text-accent-foreground;
+  }
+  
+  /* AI Recommendation Styles */
+  .ai-recommendation {
+    @apply control-card p-4 border-l-4 border-accent hover:bg-muted/5;
+    transition: var(--transition-smooth);
+  }
+  
+  .ai-recommendation:hover {
+    box-shadow: var(--shadow-interactive);
+  }
+  
+  /* Navigation and Interactive Elements */
+  .nav-button {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200;
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .nav-button.active {
+    @apply bg-primary text-primary-foreground;
+    box-shadow: var(--shadow-control);
+  }
+  
+  /* Data Visualization */
+  .chart-container {
+    @apply control-card p-6 h-80;
+  }
+  
+  /* Utility Classes */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
