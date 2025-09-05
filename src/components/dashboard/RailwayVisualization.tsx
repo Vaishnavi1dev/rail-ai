@@ -148,7 +148,7 @@ const RailwayVisualization = () => {
         </div>
 
         {/* Railway Schematic */}
-        <div className="bg-muted/10 border border-border rounded-lg overflow-hidden">
+        <div className="bg-muted/5 border border-border rounded-xl overflow-hidden shadow-sm">
           <svg 
             viewBox="0 0 600 300" 
             className="w-full h-96"
@@ -159,28 +159,29 @@ const RailwayVisualization = () => {
           >
             {/* Background Grid */}
             <defs>
-              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" opacity="0.3"/>
+              <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="hsl(var(--border))" strokeWidth="0.3" opacity="0.2"/>
               </pattern>
             </defs>
+            <rect width="100%" height="100%" fill="hsl(var(--muted) / 0.3)" />
             <rect width="100%" height="100%" fill="url(#grid)" />
 
             {/* Track Lines */}
             {showLayers.tracks && (
               <>
-                {/* Main Line */}
-                <line x1="30" y1="150" x2="570" y2="150" stroke="hsl(var(--foreground))" strokeWidth="3" />
-                <line x1="30" y1="155" x2="570" y2="155" stroke="hsl(var(--foreground))" strokeWidth="3" />
+                {/* Main Line - Cleaner styling */}
+                <line x1="30" y1="150" x2="570" y2="150" stroke="hsl(var(--muted-foreground))" strokeWidth="4" opacity="0.6" />
+                <line x1="30" y1="155" x2="570" y2="155" stroke="hsl(var(--muted-foreground))" strokeWidth="4" opacity="0.6" />
                 
-                {/* Platform Lines */}
-                <line x1="30" y1="185" x2="170" y2="185" stroke="hsl(var(--foreground))" strokeWidth="2" />
-                <line x1="30" y1="135" x2="170" y2="135" stroke="hsl(var(--foreground))" strokeWidth="2" />
-                <line x1="330" y1="185" x2="470" y2="185" stroke="hsl(var(--foreground))" strokeWidth="2" />
+                {/* Platform Lines - Thinner and cleaner */}
+                <line x1="30" y1="185" x2="170" y2="185" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
+                <line x1="30" y1="135" x2="170" y2="135" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
+                <line x1="330" y1="185" x2="470" y2="185" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
 
-                {/* Junction Lines */}
-                <line x1="170" y1="150" x2="180" y2="185" stroke="hsl(var(--foreground))" strokeWidth="2" />
-                <line x1="170" y1="155" x2="180" y2="135" stroke="hsl(var(--foreground))" strokeWidth="2" />
-                <line x1="320" y1="150" x2="330" y2="185" stroke="hsl(var(--foreground))" strokeWidth="2" />
+                {/* Junction Lines - Cleaner connections */}
+                <line x1="170" y1="150" x2="180" y2="185" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
+                <line x1="170" y1="155" x2="180" y2="135" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
+                <line x1="320" y1="150" x2="330" y2="185" stroke="hsl(var(--muted-foreground))" strokeWidth="3" opacity="0.5" />
               </>
             )}
 
@@ -192,18 +193,20 @@ const RailwayVisualization = () => {
                   y={platform.bounds.y} 
                   width={platform.bounds.width} 
                   height={platform.bounds.height}
-                  fill={platform.occupied ? 'hsl(var(--destructive) / 0.2)' : 'hsl(var(--success) / 0.2)'}
+                  fill={platform.occupied ? 'hsl(var(--destructive) / 0.15)' : 'hsl(var(--success) / 0.15)'}
                   stroke={platform.occupied ? 'hsl(var(--destructive))' : 'hsl(var(--success))'}
-                  strokeWidth="1"
-                  rx="4"
+                  strokeWidth="2"
+                  rx="6"
+                  opacity="0.8"
                 />
                 <text 
                   x={platform.bounds.x + platform.bounds.width / 2} 
                   y={platform.bounds.y + platform.bounds.height / 2 + 4}
                   textAnchor="middle" 
-                  fontSize="10" 
+                  fontSize="11" 
                   fill="hsl(var(--foreground))"
-                  fontWeight="600"
+                  fontWeight="700"
+                  opacity="0.9"
                 >
                   {platform.name}
                 </text>
@@ -213,21 +216,33 @@ const RailwayVisualization = () => {
             {/* Signals */}
             {showLayers.signals && signals.map(signal => (
               <g key={signal.id}>
+                {/* Signal background circle */}
                 <circle 
                   cx={signal.position.x} 
                   cy={signal.position.y} 
-                  r="8" 
+                  r="10" 
+                  fill="hsl(var(--card))"
+                  stroke="hsl(var(--border))" 
+                  strokeWidth="2"
+                  opacity="0.9"
+                />
+                {/* Signal status circle */}
+                <circle 
+                  cx={signal.position.x} 
+                  cy={signal.position.y} 
+                  r="7" 
                   fill={getSignalColor(signal.status)}
                   stroke="hsl(var(--foreground))" 
-                  strokeWidth="1"
+                  strokeWidth="1.5"
                 />
                 <text 
                   x={signal.position.x} 
-                  y={signal.position.y - 15}
+                  y={signal.position.y - 18}
                   textAnchor="middle" 
-                  fontSize="8" 
+                  fontSize="9" 
                   fill="hsl(var(--foreground))"
-                  fontWeight="600"
+                  fontWeight="700"
+                  opacity="0.9"
                 >
                   {signal.id}
                 </text>
@@ -237,6 +252,16 @@ const RailwayVisualization = () => {
             {/* Trains */}
             {showLayers.trains && trains.map(train => (
               <g key={train.id}>
+                {/* Train shadow */}
+                <rect 
+                  x={train.position.x - 14} 
+                  y={train.position.y - 7} 
+                  width="30" 
+                  height="16"
+                  fill="hsl(var(--foreground) / 0.1)"
+                  rx="4"
+                />
+                {/* Train body */}
                 <rect 
                   x={train.position.x - 15} 
                   y={train.position.y - 8} 
@@ -244,16 +269,19 @@ const RailwayVisualization = () => {
                   height="16"
                   fill={getTrainColor(train.type)}
                   stroke="hsl(var(--foreground))" 
-                  strokeWidth="1"
-                  rx="4"
+                  strokeWidth="2"
+                  rx="5"
+                  opacity="0.95"
                 />
+                {/* Train number */}
                 <text 
                   x={train.position.x} 
                   y={train.position.y + 3}
                   textAnchor="middle" 
-                  fontSize="8" 
+                  fontSize="9" 
                   fill="white"
-                  fontWeight="600"
+                  fontWeight="700"
+                  opacity="0.95"
                 >
                   {train.number.slice(-4)}
                 </text>
@@ -261,12 +289,13 @@ const RailwayVisualization = () => {
                 {/* Direction arrow */}
                 <polygon 
                   points={train.direction === 'forward' 
-                    ? `${train.position.x + 15},${train.position.y} ${train.position.x + 20},${train.position.y - 4} ${train.position.x + 20},${train.position.y + 4}`
-                    : `${train.position.x - 15},${train.position.y} ${train.position.x - 20},${train.position.y - 4} ${train.position.x - 20},${train.position.y + 4}`
+                    ? `${train.position.x + 15},${train.position.y} ${train.position.x + 22},${train.position.y - 5} ${train.position.x + 22},${train.position.y + 5}`
+                    : `${train.position.x - 15},${train.position.y} ${train.position.x - 22},${train.position.y - 5} ${train.position.x - 22},${train.position.y + 5}`
                   }
                   fill={getTrainColor(train.type)}
                   stroke="hsl(var(--foreground))" 
-                  strokeWidth="1"
+                  strokeWidth="1.5"
+                  opacity="0.95"
                 />
               </g>
             ))}
