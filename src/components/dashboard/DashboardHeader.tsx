@@ -11,7 +11,7 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface DashboardHeaderProps {
@@ -20,6 +20,7 @@ interface DashboardHeaderProps {
 
 const DashboardHeader = ({ currentTime }: DashboardHeaderProps) => {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
   
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-IN', { 
@@ -45,10 +46,10 @@ const DashboardHeader = ({ currentTime }: DashboardHeaderProps) => {
           {/* Left Section - Branding & Section Info */}
           <div className="flex items-center space-x-6">
             <Link to="/" className="flex items-center space-x-3">
-              <Train className="h-8 w-8 text-ir-blue" />
+              <Train className="h-8 w-8 text-primary" />
               <div>
-                <h1 className="text-xl font-bold text-ir-blue">AI Traffic Control</h1>
-                <p className="text-xs text-muted-foreground">Indian Railways</p>
+                <h1 className="text-xl font-bold text-primary">AI Traffic Control</h1>
+                <p className="text-xs text-foreground">Indian Railways</p>
               </div>
             </Link>
             
@@ -127,32 +128,32 @@ const DashboardHeader = ({ currentTime }: DashboardHeaderProps) => {
         {/* Navigation Tabs */}
         <nav className="flex space-x-6 mt-4 border-t border-border pt-4">
           <Link to="/dashboard">
-            <Button variant="ghost" className="nav-button active">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/dashboard' ? 'active' : ''}`}>
               Dashboard
             </Button>
           </Link>
           <Link to="/optimizer">
-            <Button variant="ghost" className="nav-button">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/optimizer' ? 'active' : ''}`}>
               Optimizer
             </Button>
           </Link>
           <Link to="/simulation">
-            <Button variant="ghost" className="nav-button">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/simulation' ? 'active' : ''}`}>
               Simulation
             </Button>
           </Link>
           <Link to="/analytics">
-            <Button variant="ghost" className="nav-button">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/analytics' ? 'active' : ''}`}>
               Analytics
             </Button>
           </Link>
           <Link to="/logs">
-            <Button variant="ghost" className="nav-button">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/logs' ? 'active' : ''}`}>
               Logs
             </Button>
           </Link>
           <Link to="/settings">
-            <Button variant="ghost" className="nav-button">
+            <Button variant="ghost" className={`nav-button ${location.pathname === '/settings' ? 'active' : ''}`}>
               Settings
             </Button>
           </Link>

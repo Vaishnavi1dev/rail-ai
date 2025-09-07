@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { 
   ZoomIn, 
   ZoomOut, 
@@ -31,6 +32,7 @@ interface TrainPosition {
 const RailwayVisualization = () => {
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
+  const [showLayersPanel, setShowLayersPanel] = useState(false);
   const [showLayers, setShowLayers] = useState({
     signals: true,
     trains: true,
@@ -123,26 +125,69 @@ const RailwayVisualization = () => {
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Rotate
               </Button>
-              <Button variant="outline" size="sm">
-                <Layers className="h-4 w-4 mr-2" />
-                Layers
-              </Button>
+              <Popover open={showLayersPanel} onOpenChange={setShowLayersPanel}>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    <Layers className="h-4 w-4 mr-2" />
+                    Layers
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-64" align="end">
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-sm">Layer Visibility</h4>
+                    <div className="space-y-2">
+                      {Object.entries(showLayers).map(([layer, visible]) => (
+                        <div key={layer} className="flex items-center justify-between">
+                          <span className="text-sm capitalize">{layer}</span>
+                          <Button
+                            variant={visible ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => toggleLayer(layer as keyof typeof showLayers)}
+                            className="h-6 px-2 text-xs"
+                          >
+                            {visible ? 'ON' : 'OFF'}
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="pt-2 border-t">
+                      <div className="flex space-x-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowLayers({ signals: true, trains: true, platforms: true, tracks: true })}
+                          className="flex-1 text-xs"
+                        >
+                          Show All
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowLayers({ signals: false, trains: false, platforms: false, tracks: false })}
+                          className="flex-1 text-xs"
+                        >
+                          Hide All
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </div>
       </div>
 
       <div className="p-6">
-        {/* Layer Toggles */}
+        {/* Layer Status Indicators */}
         <div className="flex flex-wrap gap-2 mb-6">
           {Object.entries(showLayers).map(([layer, visible]) => (
             <Badge 
               key={layer}
-              variant={visible ? "default" : "outline"}
-              className="cursor-pointer capitalize"
-              onClick={() => toggleLayer(layer as keyof typeof showLayers)}
+              variant={visible ? "default" : "secondary"}
+              className="capitalize pointer-events-none"
             >
-              {layer}
+              {layer} {visible ? '✓' : '✗'}
             </Badge>
           ))}
         </div>

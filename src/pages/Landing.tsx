@@ -6,7 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Train, Shield, Clock, TrendingUp, Users, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import controlRoomHero from '@/assets/control-room-hero.jpg';
+import trainImage from '@/assets/train_img.jpg';
+{/*import controlRoomHero from '@/assets/control-room-hero.jpg';*/}
 
 const Landing = () => {
   const [username, setUsername] = useState('');
@@ -26,10 +27,10 @@ const Landing = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <Train className="h-8 w-8 text-ir-blue" />
+                <Train className="h-8 w-8 text-primary" />
                 <div>
-                  <h1 className="text-2xl font-bold text-ir-blue">Indian Railways</h1>
-                  <p className="text-sm text-muted-foreground">भारतीय रेल</p>
+                  <h1 className="text-2xl font-bold text-primary">Indian Railways</h1>
+                  <p className="text-sm text-foreground">भारतीय रेल</p>
                 </div>
               </div>
             </div>
@@ -41,33 +42,65 @@ const Landing = () => {
       </header>
 
       <main className="container mx-auto px-6 py-12">
-        {/* Hero Image Section */}
-        <div className="relative mb-16 rounded-2xl overflow-hidden">
-          <img 
-            src={controlRoomHero} 
-            alt="Indian Railways AI Control Room" 
-            className="w-full h-96 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent flex items-center">
-            <div className="container px-8">
-              <div className="max-w-2xl space-y-6">
-                <Badge className="bg-accent text-accent-foreground font-semibold">
-                  AI-Powered Traffic Control
-                </Badge>
-                <h1 className="text-5xl font-bold leading-tight text-foreground">
-                  Precise Train Traffic
-                  <span className="text-gradient block">Control System</span>
-                </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  Maximize throughput and minimize delays with AI-powered optimization 
-                  recommendations for section controllers across the Indian Railways network.
-                </p>
-                <Link to="/dashboard">
-                  <Button size="lg" className="gradient-primary text-primary-foreground font-semibold">
-                    Access Control Room
-                  </Button>
-                </Link>
+        {/* Hero Section with Train Image and Text */}
+        <div className="mb-16 px-4">
+          <div className="relative max-w-7xl mx-auto">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 min-h-[400px]">
+                
+                {/* Left side - Train Image (smaller) */}
+                <div className="relative overflow-hidden lg:col-span-1">
+                  <div className="h-full flex items-center justify-center p-4">
+                    <img 
+                      src={trainImage} 
+                      alt="Indian Railways Train with Flag" 
+                      className="w-full max-w-sm h-auto object-contain rounded-lg shadow-lg"
+                    />
+                  </div>
+                </div>
+                
+                {/* Right side - Text Content (larger area) */}
+                <div className="lg:col-span-2 flex flex-col justify-center p-8 lg:p-12 text-white">
+                  <div className="space-y-6">
+                    {/* Badge */}
+                    <div className="inline-flex">
+                      <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        AI-Powered Traffic Control
+                      </span>
+                    </div>
+                    
+                    {/* Main Heading */}
+                    <div className="space-y-2">
+                      <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+                        Precise Train Traffic
+                      </h1>
+                      <h1 className="text-4xl lg:text-5xl font-bold leading-tight text-blue-400">
+                        Control System
+                      </h1>
+                    </div>
+                    
+                    {/* Description */}
+                    <p className="text-lg text-gray-300 leading-relaxed max-w-md">
+                      Maximize throughput and minimize delays with AI-powered optimization 
+                      recommendations for section controllers across the Indian Railways network.
+                    </p>
+                    
+                    {/* CTA Button */}
+                    <div className="pt-4">
+                      <Link to="/dashboard">
+                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg">
+                          Access Control Room
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                
               </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/20 to-transparent rounded-full blur-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-orange-500/20 to-transparent rounded-full blur-2xl"></div>
             </div>
           </div>
         </div>
