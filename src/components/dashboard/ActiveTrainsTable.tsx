@@ -39,6 +39,20 @@ interface Train {
 const ActiveTrainsTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
+  const [selectedTrain, setSelectedTrain] = useState<string | null>(null);
+
+  const handleTrackTrain = (trainId: string) => {
+    setSelectedTrain(trainId);
+    alert(`Now tracking Train ${trainId}`);
+  };
+
+  const handleContactCrew = (trainId: string) => {
+    alert(`Contacting crew of Train ${trainId}`);
+  };
+
+  const handleMoreActions = (trainId: string) => {
+    alert(`More actions for Train ${trainId}`);
+  };
 
   // Mock train data
   const trains: Train[] = [
@@ -237,13 +251,26 @@ const ActiveTrainsTable = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-2">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleTrackTrain(train.id)}
+                        className={selectedTrain === train.id ? "bg-primary text-primary-foreground" : ""}
+                      >
                         <MapPin className="h-3 w-3" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleContactCrew(train.id)}
+                      >
                         <Phone className="h-3 w-3" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleMoreActions(train.id)}
+                      >
                         <MoreHorizontal className="h-3 w-3" />
                       </Button>
                     </div>

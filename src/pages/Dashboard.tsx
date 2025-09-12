@@ -19,7 +19,6 @@ import {
 import MetricCard from '@/components/dashboard/MetricCard';
 import AIRecommendationPanel from '@/components/dashboard/AIRecommendationPanel';
 import ActiveTrainsTable from '@/components/dashboard/ActiveTrainsTable';
-import RailwayVisualization from '@/components/dashboard/RailwayVisualization';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 
 interface Recommendation {
@@ -150,20 +149,18 @@ const Dashboard = () => {
 
         {/* Main Control Area */}
         <section className="space-y-8">
-          {/* Railway Visualization */}
-          <div>
-            <RailwayVisualization />
-          </div>
+          {/* AI Recommendations and Active Trains Side by Side */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* AI Recommendations Panel */}
+            <div>
+              <AIRecommendationPanel recommendations={aiRecommendations} />
+            </div>
 
-          {/* AI Recommendations Panel */}
-          <div>
-            <AIRecommendationPanel recommendations={aiRecommendations} />
+            {/* Active Trains Table */}
+            <div>
+              <ActiveTrainsTable />
+            </div>
           </div>
-        </section>
-
-        {/* Active Trains Table */}
-        <section>
-          <ActiveTrainsTable />
         </section>
       </main>
     </div>

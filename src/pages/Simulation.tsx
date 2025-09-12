@@ -1,4 +1,5 @@
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import RailwayVisualization from '@/components/dashboard/RailwayVisualization';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw, FastForward } from 'lucide-react';
@@ -56,6 +57,11 @@ const Simulation = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Railway Visualization */}
+          <div>
+            <RailwayVisualization />
+          </div>
 
           {/* Scenario Builder */}
           <Card>
