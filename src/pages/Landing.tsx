@@ -15,8 +15,24 @@ const Landing = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to dashboard - in real app would handle auth
-    window.location.href = '/dashboard';
+    // Fake auth: check for valid credentials
+    const validUsername = 'controller123';
+    const validPassword = 'rail2024';
+    
+    if (username === validUsername && password === validPassword) {
+      // Valid credentials, redirect to dashboard
+      window.location.href = '/dashboard';
+    } else {
+      // Invalid credentials, show alert
+      alert('Invalid Controller ID or Password. Please try again.');
+    }
+  };
+
+  const scrollToLogin = () => {
+    const loginSection = document.getElementById('login-section');
+    if (loginSection) {
+      loginSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -87,11 +103,13 @@ const Landing = () => {
                     
                     {/* CTA Button */}
                     <div className="pt-4">
-                      <Link to="/dashboard">
-                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg">
-                          Access Control Room
-                        </Button>
-                      </Link>
+                      <Button 
+                        size="lg" 
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg"
+                        onClick={scrollToLogin}
+                      >
+                        Access Control Room
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -162,7 +180,7 @@ const Landing = () => {
           </div>
 
           {/* Login Form */}
-          <div className="flex justify-center">
+          <div className="flex justify-center" id="login-section">
             <Card className="w-full max-w-md">
               <div className="control-header">
                 <div className="flex items-center space-x-3">
