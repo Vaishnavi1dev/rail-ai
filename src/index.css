@@ -124,6 +124,14 @@
     --sidebar-accent-foreground: 210 20% 8%;
     --sidebar-border: 210 25% 90%;
     --sidebar-ring: 210 100% 50%;
+    
+    /* Remove gradients for light mode */
+    --gradient-primary: none;
+    --gradient-accent: none;
+    --gradient-control: none;
+    --gradient-status: none;
+    --gradient-paper: none;
+    --gradient-organic: none;
   }
 
   .dark {
@@ -409,6 +417,74 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
+  }
+  
+  /* Light mode gradient overrides */
+  .light .gradient-primary,
+  .light .gradient-accent,
+  .light .text-gradient {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+  }
+  
+  /* Remove gradients from control cards in light mode */
+  .light .control-card::before {
+    background: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Remove page and chart gradients in light theme to keep UI neutral */
+  .light body {
+    background-image: none !important;
+  }
+
+  /* Chart containers should not render gradients in light mode and must be shrinkable */
+  .light .chart-container {
+    background: none !important;
+    min-width: 0 !important;
+  }
+
+  .light .chart-container::before {
+    background: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Chart helpers */
+  .chart-svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* keep chart to the left to avoid overlapping adjacent cards */
+  }
+
+  .chart-svg {
+    max-width: 150px;
+    max-height: 150px;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .chart-svg-wrapper {
+      justify-content: flex-start;
+    }
+
+    .chart-svg {
+      max-width: 220px;
+      max-height: 220px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .chart-svg-wrapper {
+      justify-content: center; /* center on small screens */
+    }
+  }
+
+  /* Place pie legend below the chart on small screens to avoid overlap */
+  .pie-legend-below {
+    display: block;
   }
 
   .text-handwritten {
